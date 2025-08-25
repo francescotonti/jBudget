@@ -4,6 +4,7 @@ import it.unicam.cs.mpgc.jbudget122432.model.users.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -22,14 +23,16 @@ public class Ledger implements ILedger{
     public Ledger() {
         movements = new ArrayList<>();
     }
-    
+
     public Ledger(User owner){
         this.owner = owner;
-        movements = new ArrayList<Movement>();
+        movements = new ArrayList<>();
     }
 
     @Override
     public boolean removeMovement(Movement movement) {
+        if(movement==null)
+            throw new IllegalArgumentException("Movement cannot be null");
         if(movements.contains(movement)){
             movements.remove(movement);
             return true;
@@ -39,11 +42,13 @@ public class Ledger implements ILedger{
 
     @Override
     public List<Movement> getMovements() {
-        return movements;
+        return Collections.unmodifiableList(movements);
     }
 
     @Override
     public boolean addMovement(Movement movement) {
+        if(movement==null)
+            throw new IllegalArgumentException("Movement cannot be null");
         if(movements.contains(movement))
             return false;
         movements.add(movement);

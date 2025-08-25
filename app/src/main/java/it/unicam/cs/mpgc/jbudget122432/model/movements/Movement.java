@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.jbudget122432.model.movements;
 
-import it.unicam.cs.mpgc.jbudget122432.model.Tag;
+import it.unicam.cs.mpgc.jbudget122432.model.tags.Tag;
 import it.unicam.cs.mpgc.jbudget122432.model.users.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public final class Movement {
+public class Movement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
