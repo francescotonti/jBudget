@@ -3,12 +3,15 @@ package it.unicam.cs.mpgc.jbudget122432.model.movements;
 import it.unicam.cs.mpgc.jbudget122432.model.users.User;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Entity
 @Getter
+@Setter
 public class Ledger implements ILedger{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

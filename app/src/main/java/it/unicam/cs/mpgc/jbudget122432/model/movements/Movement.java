@@ -6,11 +6,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Movement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,5 +32,18 @@ public class Movement {
 
     @OneToMany
     private Set<Tag> tags;
+
+    public Movement(String description, double amount, Timestamp date, MovementType type, User sender) {
+        this.description = description;
+        this.amount = amount;
+        this.date = date;
+        this.type = type;
+        this.sender = sender;
+        this.tags = new HashSet<>();
+    }
+
+    public void addTag(Tag tag){
+        tags.add(tag);
+    }
 
 }

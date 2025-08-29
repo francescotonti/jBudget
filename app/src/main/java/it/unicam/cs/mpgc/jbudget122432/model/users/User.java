@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.jbudget122432.model.users;
 
+import it.unicam.cs.mpgc.jbudget122432.model.movements.ILedger;
 import it.unicam.cs.mpgc.jbudget122432.model.movements.Ledger;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;

@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.jbudget122432.controller;
 
+import it.unicam.cs.mpgc.jbudget122432.model.movements.ILedger;
 import it.unicam.cs.mpgc.jbudget122432.model.movements.Ledger;
 import it.unicam.cs.mpgc.jbudget122432.model.users.User;
 import it.unicam.cs.mpgc.jbudget122432.model.users.UserRepository;
@@ -17,6 +18,8 @@ public class UserController implements IUserController{
 
     @Override
     public User createUser(String username) {
+        if(username==null)
+            throw new IllegalArgumentException("Username is null");
         List<User> users = userRepository.getUsers();
         List<String> usernameList = users.stream().
                                         map(User::getUsername).
@@ -26,7 +29,9 @@ public class UserController implements IUserController{
         }
         User u = new User();
         u.setUsername(username);
-        u.setLedger(new Ledger());
+        Ledger l = new Ledger();
+        l.setOwner(u);
+        u.setLedger(l);
         userRepository.add(u);
         return u;
     }

@@ -16,6 +16,8 @@ public class TagController implements ITagController {
 
     @Override
     public void addTag(Tag tag) {
+        if(tag==null)
+            throw new IllegalArgumentException();
         if(!tagRepository.getTags().contains(tag)) {
             tagRepository.getTags().add(tag);
         }
@@ -23,6 +25,8 @@ public class TagController implements ITagController {
 
     @Override
     public void removeTag(Tag tag) {
+        if(tag==null)
+            throw new IllegalArgumentException();
         tagRepository.getTags().remove(tag);
     }
 
@@ -33,12 +37,16 @@ public class TagController implements ITagController {
 
     @Override
     public void createTag(String name) {
+        if(name==null)
+            throw new IllegalArgumentException();
         Tag t = new Tag(name,null,null);
         tagRepository.getTags().add(t);
     }
 
     @Override
     public void createTag(String name, Tag parent) {
+        if(name==null || parent==null)
+            throw new IllegalArgumentException();
         Tag t = new Tag(name,parent,null);
 
         tagRepository.getTags().add(t);
@@ -46,6 +54,8 @@ public class TagController implements ITagController {
 
     @Override
     public void createTag(String name, Tag parent, Set<Tag> children) {
+        if(name==null || parent==null || children==null)
+            throw new IllegalArgumentException();
         Tag t = new Tag(name,parent,children);
         tagRepository.getTags().add(t);
     }

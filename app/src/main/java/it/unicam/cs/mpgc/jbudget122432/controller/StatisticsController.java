@@ -20,16 +20,20 @@ public class StatisticsController implements IStatisticsController {
 
     @Override
     public double getTotalExpensesByTag(User user, Tag tag) {
+        if(user==null || tag==null)
+            throw new IllegalArgumentException();
         List<Movement> movements = user.getLedger().getMovements();
         return movements.stream().
-                                filter(movement->movement.getType()== MovementType.EXPENSE).
-                                filter(movement->movement.getTags().contains(tag)).
-                                map(Movement::getAmount).
-                                reduce(0.0, Double::sum);
+                        filter(movement->movement.getType()== MovementType.EXPENSE).
+                        filter(movement->movement.getTags().contains(tag)).
+                        map(Movement::getAmount).
+                        reduce(0.0, Double::sum);
     }
 
     @Override
     public double getTotalIncomeByTag(User user, Tag tag) {
+        if(user==null || tag==null)
+            throw new IllegalArgumentException();
         List<Movement> movements = user.getLedger().getMovements();
         return movements.stream().
                 filter(movement->movement.getType()== MovementType.INCOME).
@@ -40,6 +44,8 @@ public class StatisticsController implements IStatisticsController {
 
     @Override
     public Map<Tag, Double> getExpensesPerCategory(User user) {
+        if(user==null)
+            throw new IllegalArgumentException();
         List<Tag> tags = tagRepo.getTags();
         Map<Tag, Double> expensesPerCategory = new HashMap<>();
         for(Tag tag : tags) {
@@ -50,6 +56,8 @@ public class StatisticsController implements IStatisticsController {
 
     @Override
     public Map<Tag, Double> getIncomePerCategory(User user) {
+        if(user==null)
+            throw new IllegalArgumentException();
         List<Tag> tags = tagRepo.getTags();
         Map<Tag, Double> incomePerCategory = new HashMap<>();
         for(Tag tag : tags) {

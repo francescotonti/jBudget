@@ -48,4 +48,6 @@ public interface ILedger {
     List<Movement> getMovements();
 
     User getOwner();
+
+    void setOwner(User owner);
 }
